@@ -4,9 +4,17 @@ import torch.nn as nn
 from fastapi import FastAPI, File, UploadFile
 from torchvision import transforms
 from PIL import Image
+from fastapi.middleware.cors import CORSMiddleware
 
 # Initialize FastAPI
-app = FastAPI()
+app = FastAPI(tilte="mnist")
+app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+)
 
 # Device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
